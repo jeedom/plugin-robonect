@@ -67,7 +67,7 @@ class robonect extends eqLogic {
 		if (in_array($state, array(2,5,3,99))){
 			sleep(15);
 		} else{
-			sleep(120);
+			sleep(28);
 		}
 	}
 	
