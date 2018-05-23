@@ -70,6 +70,7 @@ class robonect extends eqLogic {
 				log::add('robonect','debug','Sleeping or Off ignoring refresh until change');
 				$state = $currentstate;
 			}
+<<<<<<< HEAD
 			if (in_array($state, array(2,3,5,99))){
 				$counter = $robonect->getConfiguration('timemowing',15);
 			} else if (in_array($state,array(4,7,8))){
@@ -87,6 +88,13 @@ class robonect extends eqLogic {
 				sleep(1);
 				$i++;
 			}
+=======
+		}
+		if (in_array($state, array(2,5,3,99))){
+			sleep(15);
+		} else{
+			sleep(28);
+>>>>>>> branch 'beta' of https://github.com/jeedom/plugin-robonect.git
 		}
 	}
 	
