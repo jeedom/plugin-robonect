@@ -2,14 +2,11 @@
 if (!isConnect()) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
-$eqLogics = husqvarna::byType('husqvarna');
+$eqLogics = robonect::byType('robonect');
 $eqLogic = $eqLogics[0];
-$lastpositionCMD = $eqLogic->getCmd(null, 'lastposition');
-$battery = $eqLogic->getCmd(null, 'batteryPercent')->execCmd();
-$lastErrorCode = $eqLogic->getCmd(null, 'lastErrorCode')->execCmd();
-$nextStartTimestamp = $eqLogic->getCmd(null, 'nextStartTimestamp')->execCmd();
-$mowerStatus = $eqLogic->getCmd(null, 'mowerStatus')->execCmd();
-$connected = $eqLogic->getCmd(null, 'connected')->execCmd();
+$lastpositionCMD = $eqLogic->getCmd(null, 'gpspos');
+$battery = $eqLogic->getCmd(null, 'batterie')->execCmd();
+$mowerStatus = $eqLogic->getCmd(null, 'status')->execCmd();
 if (isset($_GET['start'])) {
 	$start =$_GET['start'];
 	$end = $_GET['end'];
@@ -22,7 +19,17 @@ if (isset($_GET['start'])) {
 	$result = history::all($lastpositionCMD->getId(),$start,$end);
 }
 $currentPosition = explode(',',$lastpositionCMD->execCmd());
-$text = 'Batterie : ' . $battery . '%. Statut : ' . $mowerStatus.'. Connecté : ' . $connected . '. Erreur : ' . $lastErrorCode . '. Prochain démarrage : ' . $nextStartTimestamp . '.';
+$apiGoogle = $eqLogic->getConfiguration('apiGoogle','');
+$home = $eqLogic->getConfiguration('centerMap','');
+if ($home ==''){
+	$home = $lastpositionCMD->execCmd();
+}
+if ($apiGoogle == ''){
+	throw new Exception(__('Il vous faut une clé Api Google Maps Widget pour avoir le panel de position', __FILE__));
+}
+$homePosition = explode(',',$home);
+$text = 'Batterie : ' . $battery . '%. Statut : ' . $mowerStatus . '.';
+sendVarToJS('APIGOOGLE', $apiGoogle);
 ?>
 <html>
   <head>
@@ -49,17 +56,17 @@ $text = 'Batterie : ' . $battery . '%. Statut : ' . $mowerStatus.'. Connecté : 
     <div id="map"></div>
     <script>
       function initMap() {
-        var HOME = {lat: 45.969807, lng: 3.16071};
+        <?php
+		echo "var HOME = {lat: " .$homePosition[0] . ", lng: " .$homePosition[1] . "};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 28,
           center: HOME,
 		  mapTypeId: 'satellite'
-        });
-        <?php
+        });";
 		echo "var marker1 =new google.maps.Marker({
 				position: {lat: " . $currentPosition[0] . ", lng: " . $currentPosition[1] . "},
 				map: map,
-				icon : {url :'/plugins/husqvarna/desktop/php/automower.png'}
+				icon : {url :'/plugins/robonect/desktop/php/automower.png'}
 				});
 				";
 		$count=3;
@@ -143,8 +150,9 @@ $text = 'Batterie : ' . $battery . '%. Statut : ' . $mowerStatus.'. Connecté : 
   window.location = window.location.href.split("&start")[0];    
 });
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB75tuIe9eQPSs97FakkDv6PgKRKQrjW_Q&callback=initMap">
-    </script>
+	<?php
+    echo '<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key='.$apiGoogle.'&callback=initMap"></script>'
+	?>
   </body>
 </html>

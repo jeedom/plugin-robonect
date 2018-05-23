@@ -1,0 +1,119 @@
+<?php
+
+/* This file is part of Jeedom.
+*
+* Jeedom is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Jeedom is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+if (init('id') == '') {
+    throw new Exception('{{L\'id de l\'équipement ne peut etre vide : }}' . init('op_id'));
+}
+$id = init('id');
+sendVarToJS('hometempid', $id);
+$robonect = robonect::byId($id);
+if (!is_object($robonect)) {   
+	 throw new Exception(__('Aucun equipement ne  correspond : Il faut (re)-enregistrer l\'équipement ', __FILE__) . init('action'));
+}
+?>
+<div>
+     <span>Envoyer <?php echo $robonect->getName(); ?> à la maison pendant :</span></br></br>
+	 <div class="form-group">
+		<div class="col-xs-12">
+		<input class="form-control number" type="number"  min="0" max="60" step="1"/>
+		</div>
+		<div class="col-xs-12">
+		<select class="multiplier">
+			<option value="1">{{minute(s)}}</option>
+			<option value="60">{{heure(s)}}</option>
+			<option value="1440">{{jour(s)}}</option>
+			<option value="10080">{{semaine(s)}}</option>
+			<option value="302400">{{mois (basé sur 30 jours)}}</option>
+		</select>
+		</div>
+	</div>
+	<div class="form-group">
+	<div class="row col-xs-12">
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b selection" style="background-color:green;font-size:12px;"><i class="fa fa-clock-o"> </i> Sélection </a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b always" style="background-color:orange;font-size:12px;"><i class="fa fa-home"> </i> Nouvel ordre </a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b nothing" style="background-color:red;font-size:12px;"><i class="fa fa-times-circle"> </i> Rien faire </a>
+	</div>
+	</div>
+</br>
+<div class="form-group">
+<div class="row col-xs-12">
+<?php
+$cron = cron::byClassAndFunction('robonect', 'cronModeHandler');
+if (is_object($cron)) {
+	$next=$cron->getSchedule();
+	$nicedate = substr($next,3,2).':'.substr($next,0,2).' '. substr($next,6,2).'/'.substr($next,9,2);
+	echo '<div>' . $robonect->getName() . ' est déjà programmé pour rester dans sa base jusqu\'à : ' . $nicedate . ' !</div>';
+} else {
+	echo '<div>Rien n\'est programmé dans Jeedom pour ' . $robonect->getName() . ' !</div>';
+}
+?>
+</div>
+</div>
+</div>
+<script>
+$('.nothing').on('click', function() {
+	$('#popupDialog').popup('close');
+})
+$('.selection').on('click', function() {
+	if ($('.number').val()==''){
+		$('.eventDisplay').showAlert({message:  'Vous devez saisir une durée !',level: 'danger'});
+		setTimeout(function() { deleteAlert() }, 2000);
+	} else {
+		var saveprompt = confirm('Vous allez envoyer le robot à sa base pour ' + $('.number').val() + ' ' + $('.multiplier option:selected').text() + ' ! Voulez-vous continuer ?')
+		if (saveprompt != true){
+			return;
+		} else {
+			homeTemp(hometempid,'selection',$('.number').val()*$('.multiplier option:selected').val());
+		}
+	}
+})
+$('.always').on('click', function() {
+	homeTemp(hometempid,'always',0);
+})
+
+function homeTemp(_id,_type,_time) {
+		$.ajax({// fonction permettant de faire de l'ajax
+			type: "POST", // methode de transmission des données au fichier php
+			url: "plugins/robonect/core/ajax/robonect.ajax.php", // url du fichier php
+			data: {
+				action: "homeTemp",
+				id: _id,
+				type: _type,
+				time : _time
+			},
+			dataType: 'json',
+			error: function(request, status, error) {
+				handleAjaxError(request, status, error);
+			},
+        success: function(data) { // si l'appel a bien fonctionné
+            if (data.state != 'ok') {
+				$('.eventDisplay2').showAlert({message:  data.result,level: 'danger'});
+				setTimeout(function() { deleteAlert() }, 2000);
+                return;
+            }
+            modifyWithoutSave=false;
+			$('#popupDialog').popup('close');
+        }
+    });
+}
+
+function deleteAlert() {
+	$('.eventDisplay').hideAlert();
+}
+</script>

@@ -2,7 +2,7 @@
 if (!isConnect('admin')) {
     throw new Exception('{{401 - Accès non autorisé}}');
 }
-
+$plugin = plugin::byId('robonect');
 sendVarToJS('eqType', 'robonect');
 $eqLogics = eqLogic::byType('robonect');
 ?>
@@ -41,17 +41,22 @@ $eqLogics = eqLogic::byType('robonect');
     <span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Santé}}</center></span>
   </div>
 </div>
-<legend><i class="fa fa-table"></i>  {{Mes serveurs robonect}}</legend>
+<legend><i class="fa fa-table"></i>  {{Mes Robonects}}</legend>
 <div class="eqLogicThumbnailContainer">
          <?php
                 foreach ($eqLogics as $eqLogic) {
+					$model = strtolower($eqLogic->getConfiguration('model',''));
                     $opacity = '';
                     if ($eqLogic->getIsEnable() != 1) {
                         $opacity = 'opacity:0.3;';
                     }
-                    echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
-                    echo "<center>";
-                    echo '<img src="plugins/robonect/plugin_info/robonect_icon.png" height="105" width="95" />';
+					echo '<div class="eqLogicDisplayCard cursor" data-eqLogic_id="' . $eqLogic->getId() . '" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;' . $opacity . '" >';
+					echo "<center>";
+					if (file_exists(dirname(__FILE__) . '/../../core/config/' . $model . '.png')) {
+						echo '<img class="lazy" src="plugins/robonect/core/config/' . $model . '.png" height="105" width="105" />';
+					} else {
+						echo '<img src="' . $plugin->getPathImgIcon() . '" height="105" width="105" />';
+					}
                     echo "</center>";
                     echo '<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;"><center>' . $eqLogic->getHumanName(true, true) . '</center></span>';
                     echo '</div>';
@@ -67,7 +72,10 @@ $eqLogics = eqLogic::byType('robonect');
     <ul class="nav nav-tabs" role="tablist">
 		<li role="presentation"><a class="eqLogicAction cursor" aria-controls="home" role="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
         <li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-tachometer"></i> {{Equipement}}</a></li>
-        <li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+        <li role="presentation"><a href="#commandinfotab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes Infos}}</a></li>
+        <li role="presentation"><a href="#commandactiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes Actions}}</a></li>
+        <li role="presentation"><a href="#refreshtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-refresh"></i> {{Refreshs}}</a></li>
+        <li role="presentation"><a href="#gpstab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-compass"></i> {{Gps}}</a></li>
     </ul>
 
     <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -136,13 +144,19 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
         <input type="password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="password" placeholder="{{Password du username}}"/>
       </div>
                 </div>
+				 <div class="form-group">
+    <label class="col-lg-3 control-label">{{URL de retour}}</label>
+    <div class="alert alert-warning col-lg-9">
+        <span class="eqLogicAttr" data-l1key="configuration" data-l2key="url"></span>
+    </div>
+	</div>
             </fieldset>
         </form>
 		</div>
 <div class="col-sm-6">
 <div class="form-group">
   <center>
-    <img src="plugins/robonect/plugin_info/robonect_icon.png" style="height : 300px;margin-top:5px" />
+    <img id="icon_visu" src="plugins/robonect/plugin_info/robonect_icon.png" style="height : 300px;margin-top:5px" />
   </center>
   </div>
   
@@ -151,7 +165,13 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 		<div class="form-group">
           <label class="col-sm-3 control-label">{{Modèle}}</label>
           <div class="col-sm-6">
-            <span class="eqLogicAttr label label-info" style="font-size:1em;cursor: default;" data-l1key="configuration" data-l2key="model"></span>
+            <span class="eqLogicAttr label label-info" style="font-size:1em;cursor: default;" data-l1key="configuration" data-l2key="model" onchange="$('#icon_visu').attr('src','/plugins/robonect/core/config/'+$(this).value().toLowerCase()+'.png')"></span>
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Id}}</label>
+          <div class="col-sm-6">
+            <span class="eqLogicAttr label label-info" style="font-size:1em;cursor: default;" data-l1key="configuration" data-l2key="idrobonect"></span>
           </div>
         </div>
 		<div class="form-group">
@@ -177,9 +197,9 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 </div>
 </div>
 </div>
-<div role="tabpanel" class="tab-pane" id="commandtab">
-        <legend><i class="fa fa-list-alt"></i>  {{Tableau de commandes}}</legend>
-       <table id="table_cmd" class="table table-bordered table-condensed">
+<div role="tabpanel" class="tab-pane" id="commandinfotab">
+        </br>
+       <table id="table_cmd_info" class="table table-bordered table-condensed">
              <thead>
                 <tr>
                     <th>{{Nom}}</th><th>{{Options}}</th><th>{{Action}}</th>
@@ -190,6 +210,75 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
             </tbody>
         </table>
     </div>
+<div role="tabpanel" class="tab-pane" id="commandactiontab">
+        </br>
+       <table id="table_cmd_action" class="table table-bordered table-condensed">
+             <thead>
+                <tr>
+                    <th>{{Nom}}</th><th>{{Action}}</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+<div role="tabpanel" class="tab-pane" id="refreshtab">
+	</br>
+	<form class="form-horizontal">
+  <fieldset>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Durée de refresh lorsque le robot est en tonte (en secondes)}}</label>
+          <div class="col-sm-3">
+            <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="timemowing" placeholder="{{15 par défaut}}"></input>
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Durée de refresh lorsque le robot est en charge ou en erreur (en secondes)}}</label>
+          <div class="col-sm-3">
+            <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="timecharging" placeholder="{{120 par défaut}}"></input>
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Durée de refresh le reste du temps (en secondes)}}</label>
+          <div class="col-sm-3">
+            <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="timedefault" placeholder="{{600 par défaut}}"></input>
+          </div>
+        </div>
+	</fieldset>
+        </form>
+</div>
+<div role="tabpanel" class="tab-pane" id="gpstab">
+	</br>
+	<form class="form-horizontal">
+  <fieldset>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Coordonnées pour centrer la carte (votre maison)}}</label>
+          <div class="col-sm-3">
+            <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="centerMap" placeholder="{{Exemple : 45.8757,3.0558}}"></input>
+          </div>
+        </div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label"><a href='https://developers.google.com/maps/documentation/geocoding/start#get-a-key' target="_blank">{{Clé API Google Maps Widget}}</a></label>
+          <div class="col-sm-3">
+            <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="apiGoogle" placeholder="{{Votre clé Api Google Maps Widget}}"></input>
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Ne pas sauver toutes les positions si en base}}</label>
+          <div class="col-sm-3">
+		  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="ignorebaseposition"/></label>
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="col-sm-3 control-label">{{Coordonnées de la base (si option ne pas sauver activé)}}</label>
+          <div class="col-sm-3">
+            <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="baseposition" placeholder="{{Exemple : 45.8757,3.0558}}"></input>
+          </div>
+        </div>
+	</fieldset>
+        </form>
+</div>
 </div>
 </div>
 </div>

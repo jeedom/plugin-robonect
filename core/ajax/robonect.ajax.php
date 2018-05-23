@@ -23,6 +23,44 @@ try {
     if (!isConnect('admin')) {
         throw new Exception(__('401 - Accès non autorisé', __FILE__));
     }
+	
+	if (init('action') == 'homeTemp') {
+		$eqLogic = robonect::byId(init('id'));
+		if (!is_object($eqLogic)) {
+			throw new Exception(__('Robonect eqLogic non trouvé : ', __FILE__) . init('id'));
+		}
+		if (init('type') == 'always') {
+			$modeHome = $eqLogic->getCmd(null, 'modeHome');
+			$modeHome->execCmd();
+		} else if (init('type') == 'selection') {
+			$modeHomeTemp = $eqLogic->getCmd(null, 'modeHomeTemp');
+			$_options=array();
+			$_options['slider'] = init('time');
+			$modeHomeTemp->execCmd($_options);
+		}
+		ajax::success();
+	}
+	
+	if (init('action') == 'jobTemp') {
+		$eqLogic = robonect::byId(init('id'));
+		if (!is_object($eqLogic)) {
+			throw new Exception(__('Robonect eqLogic non trouvé : ', __FILE__) . init('id'));
+		}
+		$modeJobTemp = $eqLogic->getCmd(null, 'job');
+		$message ='remote='.init('remotestart').' after=' . init('afterwards');
+		if (init('until') != 0){
+				$message .= ' end=' . init('until');
+		} else {
+				$message .= ' duration=' . init('duration');
+		}
+		if (init('now') != 1){
+			$message .= ' start=' . init('inTime');
+		}
+		$_options=array();
+		$_options['message'] = $message;
+		$modeJobTemp->execCmd($_options);
+		ajax::success();
+	}
 
 	ajax::init();
 
