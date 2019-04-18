@@ -1,21 +1,21 @@
 <div class="eqLogic-widget eqLogic" style="min-height : 190px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" >
   <span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
-  <i class='fa fa-refresh pull-right cursor cmd refresh' data-cmd_id="#cmd_refresh_id#" style="top: 3px;right: 3px;position:absolute;"></i>
-  <i class='fa fa-home base' title="Sur sa base" style="bottom: 3px;left: 3px;position:absolute;color:#a6a6a6"></i>
-  <i class='fa fa-plug charging' title="En charge" style="bottom: 3px;left: 20px;position:absolute;color:#a6a6a6"></i>
-  <i class='jeedom meteo-soleil timer' title="Timer en veille" style="bottom: 3px;left: 37px;position:absolute;color:#a6a6a6"></i>
-  <span class="battery" style="position : absolute;bottom: 0px;right: 3px;color:white;">#batterie#% </span>
+  <i class='fas fa-sync pull-right cursor cmd refresh' data-cmd_id="#cmd_refresh_id#" style="top: 3px;right: 3px;position:absolute;"></i>
+  <i class='fa fa-home base' title="Sur sa base" style="bottom: 3px;left: 3px;position:absolute;display:none"></i>
+  <i class='fa fa-plug charging' title="En charge" style="bottom: 3px;left: 20px;position:absolute;display:none"></i>
+  <i class='jeedom meteo-soleil timer' title="Timer en veille" style="bottom: 3px;left: 30px;position:absolute;display:none"></i>
+  <span class="battery" style="position : absolute;bottom: 0px;right: 3px;">#batterie#% </span>
   <center class="widget-name" style="#hideEqLogicName#">#name_display#  <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></center>
-  
+
 <div class="row page home">
-	<a class="gotomap cursor" title="Page Carte" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotodetail cursor" title="Page Détails" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;color:white"><i class="fa fa-chevron-left"></i></a>
+	<a class="gotomap cursor" title="Page Carte" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
+	<a class="gotodetail cursor" title="Page Détails" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"><i class="fa fa-chevron-left"></i></a>
     <div class="col-xs-12">
 	<center>
-        <span class="status" style="color:white;font-size : 13px;font-weight: bold;Cursor:default">#status# <span class="timeinfo">depuis #depuis#min</span></span><br/>
+        <span class="status" style="font-size : 13px;font-weight: bold;Cursor:default">#status# <span class="timeinfo">depuis #depuis#min</span></span><br/>
         <span class="etat" data-cmd_id="#status_id#" title="Etat : #status#" style="cursor : default;font-size : 40px"></span><br/>
-		<span class="mode" style="color:white;font-size : 13px;font-weight: bold;Cursor:default">#mode#</span><br/>
-	</center>    
+		<span class="mode" style="font-size : 13px;font-weight: bold;Cursor:default">#mode#</span><br/>
+	</center>
     </div>
 	<div class="col-xs-12">
 	<center>
@@ -27,13 +27,13 @@
     </div>
 	<div class="col-xs-12">
 		<center>
-		<span class="nexttime" style="color:white;font-size : 13px;font-weight: bold;Cursor:default"><i class="jeedom divers-today1"></i> #next#</span><br/>
+		<span class="nexttime" style="font-size : 13px;font-weight: bold;Cursor:default"><i class="jeedom divers-today1"></i> #next#</span><br/>
       </center>
     </div>
   </div>
   <div class="row page map" style="display:none;">
-	<a class="gotohealth cursor" title="Page Santé" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotohome cursor" title="Page Home" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-left"></i></a>
+	<a class="gotohealth cursor" title="Page Santé" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
+	<a class="gotohome cursor" title="Page Home" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
     <div class="col-xs-12">
 	<center>
         <iframe class="noRefresh" src="https://maps.google.com/maps/embed/v1/place?key=#apigoogle#&q=#gpspos#&zoom=19&maptype=satellite" width="180" height="150" frameborder="0" style="border:0"></iframe>
@@ -46,8 +46,8 @@
     </div>
   </div>
   <div class="row page health" style="display:none;">
-	<a class="gotostats cursor" title="Page Details" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotomap cursor" title="Page Carte" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-left"></i></a>
+	<a class="gotostats cursor" title="Page Details" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
+	<a class="gotomap cursor" title="Page Carte" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
 	<div class="col-xs-6">
 	<center>
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Batterie</span></u>
@@ -58,14 +58,14 @@
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Santé</span></u>
 	</center>
 	</div>
-	<div class="col-xs-1"> 
+	<div class="col-xs-1">
     </div>
 	<div class="col-xs-1">
 	<center>
-        <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-tachometer"></i></span>
+        <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fas fa-tachometer-alt"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="jeedom jeedom-thermo-chaud"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-bolt"></i></span>
-	</center>    
+	</center>
     </div>
     <div class="col-xs-4">
 	<center>
@@ -78,14 +78,14 @@
         <span style="font-size : 0.8em; font-weight: bold;cursor:default"><i class="jeedom jeedom-thermo-chaud"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default"><i class="fa fa-tint"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-times"></i></span>
-	</center>    
+	</center>
     </div>
 	<div class="col-xs-3">
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default">#temperature#°C</span><br/>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default">#humidity#%</span><br/>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default">#totalerrors#</span>
-	</center>    
+	</center>
     </div>
 	<div class="col-xs-6">
 	<center>
@@ -97,14 +97,14 @@
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Lames</span></u>
 	</center>
 	</div>
-	<div class="col-xs-1"> 
+	<div class="col-xs-1">
     </div>
 	<div class="col-xs-1">
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-arrow-left"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-arrow-right"></i></span>
-        <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-scissors"></i></span>
-	</center>    
+        <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fas fa-cut"></i></span>
+	</center>
     </div>
 	<div class="col-xs-4">
 	<center>
@@ -116,8 +116,8 @@
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-calendar"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="jeedom divers-svg2"></i></span>
-        <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-scissors"></i></span>
-	</center>    
+        <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fas fa-cut"></i></span>
+	</center>
     </div>
 	<div class="col-xs-4">
 	<center>
@@ -127,8 +127,8 @@
     </div>
   </div>
   <div class="row page stats" style="display:none;">
-	<a class="gotodetail cursor" title="Page Home" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotohealth cursor" title="Page Santé" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-left"></i></a>
+	<a class="gotodetail cursor" title="Page Home" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
+	<a class="gotohealth cursor" title="Page Santé" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
     <div class="col-xs-6">
 	<center>
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Dernière</span></u>
@@ -139,13 +139,13 @@
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Moyenne</span></u>
 	</center>
 	</div>
-	<div class="col-xs-1"> 
+	<div class="col-xs-1">
     </div>
 	<div class="col-xs-1">
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="jeedom nature-grass"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-search"></i></span>
-	</center>    
+	</center>
     </div>
     <div class="col-xs-4">
 	<center>
@@ -156,13 +156,13 @@
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default"><i class="jeedom nature-grass"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default"><i class="fa fa-search"></i></span>
-	</center>    
+	</center>
     </div>
 	<div class="col-xs-3">
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default">#moymowing#min</span><br/>
         <span style="font-size : 0.8em; font-weight: bold;cursor:default">#moysearch#min</span>
-	</center>    
+	</center>
     </div>
 	<div class="col-xs-6">
 	<center>
@@ -174,14 +174,14 @@
          <u><span style="font-size : 1em; font-weight: bold;cursor:default">Total 2</span></u>
 	</center>
 	</div>
-	<div class="col-xs-1"> 
+	<div class="col-xs-1">
     </div>
 	<div class="col-xs-1">
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="jeedom nature-grass"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-search"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-bolt"></i></span>
-	</center>    
+	</center>
     </div>
 	<div class="col-xs-4">
 	<center>
@@ -193,7 +193,7 @@
 	<center>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="jeedom animal-sheep1"></i></span>
         <span style="font-size : 0.8em; font-weight: bold;margin-right:5px;cursor:default"><i class="fa fa-bolt"></i></span>
-	</center>    
+	</center>
     </div>
 	<div class="col-xs-4">
 	<center>
@@ -202,70 +202,70 @@
     </div>
   </div>
    <div class="row page detail" style="display:none;">
-	<a class="gotohome cursor" title="Page Home" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotostats cursor" title="Page Santé" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;color:white"><i class="fa fa-chevron-left"></i></a>
+	<a class="gotohome cursor" title="Page Home" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
+	<a class="gotostats cursor" title="Page Santé" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
 	<div class="col-xs-12">
 	<center>
-        <span style="color:white;font-size : 13px;font-weight: bold;Cursor:default"><i class="jeedom divers-today1"></i> #robottime# le #robotdate#</span><br/>
-		<span style="color:white;font-size : 13px;font-weight: bold;Cursor:default">#wlansignal#dBm</span><br/>
-	</center>    
+        <span style="font-size : 13px;font-weight: bold;Cursor:default"><i class="jeedom divers-today1"></i> #robottime# le #robotdate#</span><br/>
+		<span style="font-size : 13px;font-weight: bold;Cursor:default">#wlansignal#dBm</span><br/>
+	</center>
     </div>
     <div class="col-xs-12">
 	<center>
         <a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd modeMan" data-cmd_id="#cmd_modeMan_id#" title="Mode Manuel"><i class="fa fa-male"></i></a>
         <a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd turbo" data-cmd_id="#cmd_start_id#" title="Redémarrer"><i class="fa fa-play"></i></a>
         <a class="ui-btn ui-mini ui-btn-inline ui-btn-b stop" data-cmd_id="#cmd_stop_id#" title="Arrêter"><i class="fa fa-stop"></i></a>
-	</center>    
+	</center>
     </div>
   </div>
 
   <script>
 	if ($('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page')=='home'){
-		$('.page').hide();
-		$('.home').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .home').show();
 	} else if ($('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page')=='map'){
-		$('.page').hide();
-		$('.map').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .map').show();
 	} else if ($('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page')=='detail'){
-		$('.page').hide();
-		$('.detail').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .detail').show();
 	} else if ($('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page')=='health'){
-		$('.page').hide();
-		$('.health').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .health').show();
 	} else if ($('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page')=='stats'){
-		$('.page').hide();
-		$('.stats').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .stats').show();
 	}
-	$('.modeHome').on('click', function() {
-	page('index.php?v=m&plugin=robonect&modal=homeMobile&id='+ #id#,'Que voulez vous faire ?',null,'robonect',true);
+	$('.eqLogic[data-eqLogic_uid=#uid#] .modeHome').on('click', function() {
+	page('index.php?v=m&plugin=robonect&modal=homeMobile&id=#id#','Que voulez vous faire ?',null,'robonect',true);
 });
-$('.modeJob').on('click', function() {
-	page('index.php?v=m&plugin=robonect&modal=jobMobile&id='+ #id#,'Que voulez vous faire ?',null,'robonect',true);
+$('.eqLogic[data-eqLogic_uid=#uid#] .modeJob').on('click', function() {
+	page('index.php?v=m&plugin=robonect&modal=jobMobile&id=#id#','Que voulez vous faire ?',null,'robonect',true);
 });
-	$('.gotomap').on('click', function() {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .gotomap').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page','map');
-		$('.page').hide();
-		$('.map').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .map').show();
 	});
-	$('.gotohome').on('click', function() {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .gotohome').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page','home');
-		$('.page').hide();
-		$('.home').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .home').show();
 	});
-	$('.gotodetail').on('click', function() {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .gotodetail').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page','detail');
-		$('.page').hide();
-		$('.detail').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .detail').show();
 	});
-	$('.gotohealth').on('click', function() {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .gotohealth').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page','health');
-		$('.page').hide();
-		$('.health').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .health').show();
 	});
-	$('.gotostats').on('click', function() {
+	$('.eqLogic[data-eqLogic_uid=#uid#] .gotostats').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#]').attr('data-page','stats');
-		$('.page').hide();
-		$('.stats').show();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .page').hide();
+		$('.eqLogic[data-eqLogic_uid=#uid#] .stats').show();
 	});
 	if ('#next#' == 'Aucun'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .nexttime').hide();
@@ -274,40 +274,40 @@ $('.modeJob').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#] .timeinfo').hide();
 	}
 	if ('#timerstatus#' == '2') {
-		$('.eqLogic[data-eqLogic_uid=#uid#] .timer').css('color', 'white');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .timer').css('display', 'show');
 	}
 	if ('#statusnum#' == '1'){
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 200px;" />');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('color', 'white');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 100%;" />');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
 	} else if ('#statusnum#' == '2') {
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-tonte.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-tonte.gif" style="width : 100%;" />');
     } else if ('#statusnum#' == '3'){
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-retour.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-retour.gif" style="width : 100%;" />');
 	} else if ('#statusnum#' == '4'){
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('color', 'white');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('color', 'white');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('display', 'show');
 	if ('#batterie#' <= 37) {
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-rouge.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-rouge.gif" style="width : 100%;" />');
     } else if ('#batterie#' <= 65) {
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-orange.gif" style="width : 190px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-orange.gif" style="width : 100%;" />');
     } else if ('#batterie#' <= 90) {
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-jaune.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-jaune.gif" style="width : 100%;" />');
     } else {
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-verte.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-verte.gif" style="width : 100%;" />');
     }
 	} else if ('#statusnum#' == '5'){
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-depart.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-depart.gif" style="width : 100%;" />');
 	} else if ('#statusnum#' == '7'){
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 100%;" />');
 	} else if ('#statusnum#' == '8'){
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 200px;" />');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 100%;" />');
 	} else if ('#statusnum#' == '17'){
-      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 200px;" />');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('color', 'white');
+      $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 100%;" />');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
 	} else if ('#statusnum#' == '16'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-power-off"></i>');
 	} else {
-		$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 200px;" />');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 100%;" />');
 	}
     if ('#batterie#' <= 30) {
       $('.eqLogic[data-eqLogic_uid=#uid#] .battery').append('<i class="fa fa-battery-empty"></i>');
@@ -325,7 +325,7 @@ $('.modeJob').on('click', function() {
 	if ('#stopped#' == '1' && '#statusnum#' == '1'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').empty().append('<img src="/plugins/robonect/core/config/315x.png" style="height : 100px;margin-top:-20px;margin-bottom:-20px" />');
       $('.eqLogic[data-eqLogic_uid=#uid#] .status').empty().append('A l\'arrêt');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('color', 'white');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
 	}
    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
      jeedom.cmd.execute({id: $(this).data('cmd_id')});

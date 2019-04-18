@@ -21,7 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class robonect extends eqLogic {
 	/***************************Attributs*******************************/
-	
+
 	public static function deamon_info() {
 		$return = array();
 		$return['log'] = '';
@@ -54,7 +54,7 @@ class robonect extends eqLogic {
 		}
 		$cron->halt();
 	}
-	
+
 	public static function pull() {
 		$eqLogics = eqLogic::byType('robonect', true);
 		foreach ($eqLogics as $robonect) {
@@ -89,14 +89,14 @@ class robonect extends eqLogic {
 			}
 		}
 	}
-	
+
 	public static function cronModeHandler($_params) {
 		$id = $_params['robonect_id'];
 		$eqLogic = eqLogic::byId($id);
 		$cmd = $eqLogic->getCmd(null, $_params['mode']);
 		$cmd->execCmd();
 	}
-	
+
 	public static function convertDec($var) {
 		$var = preg_replace('#([^.a-z0-9]+)#i', '-', $var);
 		$tab = explode('-', $var);
@@ -105,7 +105,7 @@ class robonect extends eqLogic {
 		$replace = array('', '-', '', '-', '', '-', '', '-');
 		return str_replace($pattern, $replace, $tab[3]) . $varD;
 	}
-	
+
 	public function getModeHuman()
     {
         return array(  	0 => 'Auto',
@@ -114,7 +114,7 @@ class robonect extends eqLogic {
 						3 => 'Démo',
         );
     }
-	
+
 	public function getStatusHuman()
     {
         return array(  	0 => 'Parking',
@@ -129,7 +129,7 @@ class robonect extends eqLogic {
 						17 => 'Fait dodo',
         );
     }
-	
+
 	public function getMonthHuman()
     {
         return array(  	'01' => 'Janvier',
@@ -146,7 +146,7 @@ class robonect extends eqLogic {
 						'12' => 'Décembre',
         );
     }
-	
+
 	public function convertMonthHuman($_date)
     {
         $montharray = array(  	'January'	=>  'Janvier',
@@ -167,7 +167,7 @@ class robonect extends eqLogic {
 		}
 		return $_date;
     }
-	
+
 	public function getTimerHuman()
     {
         return array(  	0 => 'Désactivé',
@@ -175,7 +175,7 @@ class robonect extends eqLogic {
 						2 => 'Veille',
         );
     }
-	
+
 	public function getrobonectInfo() {
 		try {
 			$servip = $this->getConfiguration('servip','');
@@ -186,33 +186,40 @@ class robonect extends eqLogic {
 				$url = 'http://' . $servip . '/json?user='.$user.'&pass='.$password.'&cmd=';
 			}
 			$request_http = new com_http($url.'version');
-			$robonectInfo=$request_http->exec();
+			$robonectInfo=$request_http->exec(5,2);
 			log::add('robonect','debug',$robonectInfo);
 			$jsonrobonectInfo = json_decode($robonectInfo,true);
-			usleep(500000);
+			sleep(1);
 			$request_http_hour = new com_http($url.'hour');
-			$robonectHour=$request_http_hour->exec();
+			$robonectHour=$request_http_hour->exec(5,2);
 			log::add('robonect','debug',$robonectHour);
 			$jsonrobonectHour = json_decode($robonectHour,true);
-			usleep(500000);
+			sleep(1);
 			$request_http_status = new com_http($url.'status');
-			$robonectStatus=$request_http_status->exec();
+			$robonectStatus=$request_http_status->exec(5,2);
+			$robonectStatus = mb_convert_encoding($robonectStatus,'UTF-8','ISO-8859-1');
 			log::add('robonect','debug',$robonectStatus);
 			$jsonrobonectStatus = json_decode($robonectStatus,true);
-			usleep(500000);
+			sleep(1);
+			$request_http_error = new com_http($url.'error');
+			$robonectError=$request_http_error->exec(5,2);
+			$robonectError = mb_convert_encoding($robonectError,'UTF-8','ISO-8859-1');
+			log::add('robonect','debug',$robonectError);
+			$jsonrobonectError = json_decode($robonectError,true);
+			sleep(1);
 			$request_http_motor = new com_http($url.'motor');
-			$robonectMotor=$request_http_motor->exec();
+			$robonectMotor=$request_http_motor->exec(5,2);
 			log::add('robonect','debug',$robonectMotor);
 			$jsonrobonectMotor = json_decode($robonectMotor,true);
-			usleep(500000);
+			sleep(1);
 			$request_http_battery = new com_http($url.'battery');
-			$robonectBattery=$request_http_battery->exec();
+			$robonectBattery=$request_http_battery->exec(5,2);
 			log::add('robonect','debug',$robonectBattery);
 			$jsonrobonectBattery = json_decode($robonectBattery,true);
-			usleep(500000);
+			sleep(1);
 			$request_http_gps = new com_http($url.'gps');
-			$robonectGps=$request_http_gps->exec();
-			$robonectGps = preg_replace('/[^\x20-\x7E]/','°', $robonectGps);
+			$robonectGps=$request_http_gps->exec(5,2);
+			$robonectGps = mb_convert_encoding($robonectGps,'UTF-8','ISO-8859-1');
 			log::add('robonect','debug',$robonectGps);
 			$jsonrobonectGps = json_decode($robonectGps,true);
 			$change=0;
@@ -411,21 +418,21 @@ class robonect extends eqLogic {
 			}
 			$this->refreshWidget();
 		} catch (Exception $e) {
-			log::add('robonect','debug','Erreur lors de la récupération des infos');
+			log::add('robonect','debug','Erreur lors de la récupération des infos ' . $e);
 			$return = 99;
 		}
 		return $return;
 	}
-	
+
 	public function getImage(){
 		return 'plugins/robonect/plugin_info/robonect_icon.png';
 	}
-	
+
 	public function preSave() {
-		$this->setConfiguration('url',network::getNetworkAccess('internal') . '/plugins/robonect/core/php/robonectApi.php?apikey=' . jeedom::getApiKey('robonect') . '&jid=' . $this->getId());
+		$this->setConfiguration('url',network::getNetworkAccess('internal') . '/plugins/robonect/core/php/Api.php?apikey=' . jeedom::getApiKey('robonect') . '&jid=' . $this->getId());
 		$this->setConfiguration('battery_type', 'Batterie');
 	}
-	
+
 	public function postSave() {
 		$batterie = $this->getCmd(null, 'batterie');
 		if (!is_object($batterie)) {
@@ -439,7 +446,7 @@ class robonect extends eqLogic {
 		$batterie->setSubType('numeric');
 		$batterie->setEqLogic_id($this->getId());
 		$batterie->save();
-		
+
 		$mode = $this->getCmd(null, 'mode');
 		if (!is_object($mode)) {
 			$mode = new robonectcmd();
@@ -451,7 +458,7 @@ class robonect extends eqLogic {
 		$mode->setSubType('string');
 		$mode->setEqLogic_id($this->getId());
 		$mode->save();
-		
+
 		$status = $this->getCmd(null, 'status');
 		if (!is_object($status)) {
 			$status = new robonectcmd();
@@ -463,7 +470,7 @@ class robonect extends eqLogic {
 		$status->setSubType('string');
 		$status->setEqLogic_id($this->getId());
 		$status->save();
-		
+
 		$modenum = $this->getCmd(null, 'modenum');
 		if (!is_object($modenum)) {
 			$modenum = new robonectcmd();
@@ -475,7 +482,7 @@ class robonect extends eqLogic {
 		$modenum->setSubType('numeric');
 		$modenum->setEqLogic_id($this->getId());
 		$modenum->save();
-		
+
 		$statusnum = $this->getCmd(null, 'statusnum');
 		if (!is_object($statusnum)) {
 			$statusnum = new robonectcmd();
@@ -487,7 +494,7 @@ class robonect extends eqLogic {
 		$statusnum->setSubType('numeric');
 		$statusnum->setEqLogic_id($this->getId());
 		$statusnum->save();
-		
+
 		$statesince = $this->getCmd(null, 'statesince');
 		if (!is_object($statesince)) {
 			$statesince = new robonectcmd();
@@ -499,7 +506,7 @@ class robonect extends eqLogic {
 		$statesince->setSubType('numeric');
 		$statesince->setEqLogic_id($this->getId());
 		$statesince->save();
-		
+
 		$stopped = $this->getCmd(null, 'stopped');
 		if (!is_object($stopped)) {
 			$stopped = new robonectcmd();
@@ -511,7 +518,7 @@ class robonect extends eqLogic {
 		$stopped->setSubType('binary');
 		$stopped->setEqLogic_id($this->getId());
 		$stopped->save();
-		
+
 		$wlansignal = $this->getCmd(null, 'wlansignal');
 		if (!is_object($wlansignal)) {
 			$wlansignal = new robonectcmd();
@@ -524,7 +531,7 @@ class robonect extends eqLogic {
 		$wlansignal->setSubType('numeric');
 		$wlansignal->setEqLogic_id($this->getId());
 		$wlansignal->save();
-		
+
 		$temperature = $this->getCmd(null, 'temperature');
 		if (!is_object($temperature)) {
 			$temperature = new robonectcmd();
@@ -537,7 +544,7 @@ class robonect extends eqLogic {
 		$temperature->setSubType('numeric');
 		$temperature->setEqLogic_id($this->getId());
 		$temperature->save();
-		
+
 		$humidity = $this->getCmd(null, 'humidity');
 		if (!is_object($humidity)) {
 			$humidity = new robonectcmd();
@@ -550,7 +557,7 @@ class robonect extends eqLogic {
 		$humidity->setSubType('numeric');
 		$humidity->setEqLogic_id($this->getId());
 		$humidity->save();
-		
+
 		$error = $this->getCmd(null, 'error');
 		if (!is_object($error)) {
 			$error = new robonectcmd();
@@ -562,7 +569,7 @@ class robonect extends eqLogic {
 		$error->setSubType('numeric');
 		$error->setEqLogic_id($this->getId());
 		$error->save();
-		
+
 		$errorhuman = $this->getCmd(null, 'errorhuman');
 		if (!is_object($errorhuman)) {
 			$errorhuman = new robonectcmd();
@@ -574,7 +581,7 @@ class robonect extends eqLogic {
 		$errorhuman->setSubType('string');
 		$errorhuman->setEqLogic_id($this->getId());
 		$errorhuman->save();
-		
+
 		$robottime = $this->getCmd(null, 'robottime');
 		if (!is_object($robottime)) {
 			$robottime = new robonectcmd();
@@ -586,7 +593,7 @@ class robonect extends eqLogic {
 		$robottime->setSubType('string');
 		$robottime->setEqLogic_id($this->getId());
 		$robottime->save();
-		
+
 		$robotdate = $this->getCmd(null, 'robotdate');
 		if (!is_object($robotdate)) {
 			$robotdate = new robonectcmd();
@@ -598,7 +605,7 @@ class robonect extends eqLogic {
 		$robotdate->setSubType('string');
 		$robotdate->setEqLogic_id($this->getId());
 		$robotdate->save();
-		
+
 		$lame = $this->getCmd(null, 'lame');
 		if (!is_object($lame)) {
 			$lame = new robonectcmd();
@@ -611,7 +618,7 @@ class robonect extends eqLogic {
 		$lame->setSubType('numeric');
 		$lame->setEqLogic_id($this->getId());
 		$lame->save();
-		
+
 		$lametime = $this->getCmd(null, 'lametime');
 		if (!is_object($lametime)) {
 			$lametime = new robonectcmd();
@@ -624,7 +631,7 @@ class robonect extends eqLogic {
 		$lametime->setSubType('numeric');
 		$lametime->setEqLogic_id($this->getId());
 		$lametime->save();
-		
+
 		$lameage = $this->getCmd(null, 'lameage');
 		if (!is_object($lameage)) {
 			$lameage = new robonectcmd();
@@ -637,7 +644,7 @@ class robonect extends eqLogic {
 		$lameage->setSubType('numeric');
 		$lameage->setEqLogic_id($this->getId());
 		$lameage->save();
-		
+
 		$timerstatus = $this->getCmd(null, 'timerstatus');
 		if (!is_object($timerstatus)) {
 			$timerstatus = new robonectcmd();
@@ -649,7 +656,7 @@ class robonect extends eqLogic {
 		$timerstatus->setSubType('numeric');
 		$timerstatus->setEqLogic_id($this->getId());
 		$timerstatus->save();
-		
+
 		$timerstatushuman = $this->getCmd(null, 'timerstatushuman');
 		if (!is_object($timerstatushuman)) {
 			$timerstatushuman = new robonectcmd();
@@ -661,7 +668,7 @@ class robonect extends eqLogic {
 		$timerstatushuman->setSubType('string');
 		$timerstatushuman->setEqLogic_id($this->getId());
 		$timerstatushuman->save();
-		
+
 		$timernextday = $this->getCmd(null, 'timernextday');
 		if (!is_object($timernextday)) {
 			$timernextday = new robonectcmd();
@@ -673,7 +680,7 @@ class robonect extends eqLogic {
 		$timernextday->setSubType('string');
 		$timernextday->setEqLogic_id($this->getId());
 		$timernextday->save();
-		
+
 		$timernexttime = $this->getCmd(null, 'timernexttime');
 		if (!is_object($timernexttime)) {
 			$timernexttime = new robonectcmd();
@@ -685,7 +692,7 @@ class robonect extends eqLogic {
 		$timernexttime->setSubType('string');
 		$timernexttime->setEqLogic_id($this->getId());
 		$timernexttime->save();
-		
+
 		$leftwheelspeed = $this->getCmd(null, 'leftwheelspeed');
 		if (!is_object($leftwheelspeed)) {
 			$leftwheelspeed = new robonectcmd();
@@ -698,7 +705,7 @@ class robonect extends eqLogic {
 		$leftwheelspeed->setSubType('numeric');
 		$leftwheelspeed->setEqLogic_id($this->getId());
 		$leftwheelspeed->save();
-		
+
 		$rightwheelspeed = $this->getCmd(null, 'rightwheelspeed');
 		if (!is_object($rightwheelspeed)) {
 			$rightwheelspeed = new robonectcmd();
@@ -711,7 +718,7 @@ class robonect extends eqLogic {
 		$rightwheelspeed->setSubType('numeric');
 		$rightwheelspeed->setEqLogic_id($this->getId());
 		$rightwheelspeed->save();
-		
+
 		$bladespeed = $this->getCmd(null, 'bladespeed');
 		if (!is_object($bladespeed)) {
 			$bladespeed = new robonectcmd();
@@ -724,7 +731,7 @@ class robonect extends eqLogic {
 		$bladespeed->setSubType('numeric');
 		$bladespeed->setEqLogic_id($this->getId());
 		$bladespeed->save();
-		
+
 		$batteryvoltage = $this->getCmd(null, 'batteryvoltage');
 		if (!is_object($batteryvoltage)) {
 			$batteryvoltage = new robonectcmd();
@@ -737,7 +744,7 @@ class robonect extends eqLogic {
 		$batteryvoltage->setSubType('numeric');
 		$batteryvoltage->setEqLogic_id($this->getId());
 		$batteryvoltage->save();
-		
+
 		$batterytemperature = $this->getCmd(null, 'batterytemperature');
 		if (!is_object($batterytemperature)) {
 			$batterytemperature = new robonectcmd();
@@ -750,7 +757,7 @@ class robonect extends eqLogic {
 		$batterytemperature->setSubType('numeric');
 		$batterytemperature->setEqLogic_id($this->getId());
 		$batterytemperature->save();
-		
+
 		$batterycapacity = $this->getCmd(null, 'batterycapacity');
 		if (!is_object($batterycapacity)) {
 			$batterycapacity = new robonectcmd();
@@ -763,7 +770,7 @@ class robonect extends eqLogic {
 		$batterycapacity->setSubType('numeric');
 		$batterycapacity->setEqLogic_id($this->getId());
 		$batterycapacity->save();
-		
+
 		$totalrun = $this->getCmd(null, 'totalrun');
 		if (!is_object($totalrun)) {
 			$totalrun = new robonectcmd();
@@ -776,7 +783,7 @@ class robonect extends eqLogic {
 		$totalrun->setSubType('numeric');
 		$totalrun->setEqLogic_id($this->getId());
 		$totalrun->save();
-		
+
 		$totalmow = $this->getCmd(null, 'totalmow');
 		if (!is_object($totalmow)) {
 			$totalmow = new robonectcmd();
@@ -789,7 +796,7 @@ class robonect extends eqLogic {
 		$totalmow->setSubType('numeric');
 		$totalmow->setEqLogic_id($this->getId());
 		$totalmow->save();
-		
+
 		$totalsearch = $this->getCmd(null, 'totalsearch');
 		if (!is_object($totalsearch)) {
 			$totalsearch = new robonectcmd();
@@ -802,7 +809,7 @@ class robonect extends eqLogic {
 		$totalsearch->setSubType('numeric');
 		$totalsearch->setEqLogic_id($this->getId());
 		$totalsearch->save();
-		
+
 		$totalcharge = $this->getCmd(null, 'totalcharge');
 		if (!is_object($totalcharge)) {
 			$totalcharge = new robonectcmd();
@@ -815,7 +822,7 @@ class robonect extends eqLogic {
 		$totalcharge->setSubType('numeric');
 		$totalcharge->setEqLogic_id($this->getId());
 		$totalcharge->save();
-		
+
 		$numbercharges = $this->getCmd(null, 'numbercharges');
 		if (!is_object($numbercharges)) {
 			$numbercharges = new robonectcmd();
@@ -827,7 +834,7 @@ class robonect extends eqLogic {
 		$numbercharges->setSubType('numeric');
 		$numbercharges->setEqLogic_id($this->getId());
 		$numbercharges->save();
-		
+
 		$totalerrors = $this->getCmd(null, 'totalerrors');
 		if (!is_object($totalerrors)) {
 			$totalerrors = new robonectcmd();
@@ -839,7 +846,7 @@ class robonect extends eqLogic {
 		$totalerrors->setSubType('numeric');
 		$totalerrors->setEqLogic_id($this->getId());
 		$totalerrors->save();
-		
+
 		$lastsearch = $this->getCmd(null, 'lastsearch');
 		if (!is_object($lastsearch)) {
 			$lastsearch = new robonectcmd();
@@ -852,7 +859,7 @@ class robonect extends eqLogic {
 		$lastsearch->setSubType('numeric');
 		$lastsearch->setEqLogic_id($this->getId());
 		$lastsearch->save();
-		
+
 		$lastmowing = $this->getCmd(null, 'lastmowing');
 		if (!is_object($lastmowing)) {
 			$lastmowing = new robonectcmd();
@@ -865,7 +872,7 @@ class robonect extends eqLogic {
 		$lastmowing->setSubType('numeric');
 		$lastmowing->setEqLogic_id($this->getId());
 		$lastmowing->save();
-		
+
 		$moymowing = $this->getCmd(null, 'moymowing');
 		if (!is_object($moymowing)) {
 			$moymowing = new robonectcmd();
@@ -878,7 +885,7 @@ class robonect extends eqLogic {
 		$moymowing->setSubType('numeric');
 		$moymowing->setEqLogic_id($this->getId());
 		$moymowing->save();
-		
+
 		$moysearch = $this->getCmd(null, 'moysearch');
 		if (!is_object($moysearch)) {
 			$moysearch = new robonectcmd();
@@ -891,7 +898,7 @@ class robonect extends eqLogic {
 		$moysearch->setSubType('numeric');
 		$moysearch->setEqLogic_id($this->getId());
 		$moysearch->save();
-		
+
 		$gpspos = $this->getCmd(null, 'gpspos');
 		if (!is_object($gpspos)) {
 			$gpspos = new robonectcmd();
@@ -904,7 +911,7 @@ class robonect extends eqLogic {
 		$gpspos->setSubType('string');
 		$gpspos->setEqLogic_id($this->getId());
 		$gpspos->save();
-		
+
 		$gpssat = $this->getCmd(null, 'gpssat');
 		if (!is_object($gpssat)) {
 			$gpssat = new robonectcmd();
@@ -916,7 +923,7 @@ class robonect extends eqLogic {
 		$gpssat->setSubType('numeric');
 		$gpssat->setEqLogic_id($this->getId());
 		$gpssat->save();
-		
+
 		#ACTIONS
 		$start = $this->getCmd(null, 'start');
 		if (!is_object($start)) {
@@ -929,7 +936,7 @@ class robonect extends eqLogic {
 		$start->setSubType('other');
 		$start->setEqLogic_id($this->getId());
 		$start->save();
-		
+
 		$stop = $this->getCmd(null, 'stop');
 		if (!is_object($stop)) {
 			$stop = new robonectcmd();
@@ -941,7 +948,7 @@ class robonect extends eqLogic {
 		$stop->setSubType('other');
 		$stop->setEqLogic_id($this->getId());
 		$stop->save();
-		
+
 		$modeAuto = $this->getCmd(null, 'modeAuto');
 		if (!is_object($modeAuto)) {
 			$modeAuto = new robonectcmd();
@@ -953,7 +960,7 @@ class robonect extends eqLogic {
 		$modeAuto->setSubType('other');
 		$modeAuto->setEqLogic_id($this->getId());
 		$modeAuto->save();
-		
+
 		$modeMan = $this->getCmd(null, 'modeMan');
 		if (!is_object($modeMan)) {
 			$modeMan = new robonectcmd();
@@ -965,7 +972,7 @@ class robonect extends eqLogic {
 		$modeMan->setSubType('other');
 		$modeMan->setEqLogic_id($this->getId());
 		$modeMan->save();
-		
+
 		$modeEod = $this->getCmd(null, 'modeEod');
 		if (!is_object($modeEod)) {
 			$modeEod = new robonectcmd();
@@ -977,7 +984,7 @@ class robonect extends eqLogic {
 		$modeEod->setSubType('other');
 		$modeEod->setEqLogic_id($this->getId());
 		$modeEod->save();
-		
+
 		$modeHome = $this->getCmd(null, 'modeHome');
 		if (!is_object($modeHome)) {
 			$modeHome = new robonectcmd();
@@ -989,7 +996,7 @@ class robonect extends eqLogic {
 		$modeHome->setSubType('other');
 		$modeHome->setEqLogic_id($this->getId());
 		$modeHome->save();
-		
+
 		$modeHomeTemp = $this->getCmd(null, 'modeHomeTemp');
 		if (!is_object($modeHomeTemp)) {
 			$modeHomeTemp = new robonectcmd();
@@ -1001,7 +1008,7 @@ class robonect extends eqLogic {
 		$modeHomeTemp->setSubType('slider');
 		$modeHomeTemp->setEqLogic_id($this->getId());
 		$modeHomeTemp->save();
-		
+
 		$job = $this->getCmd(null, 'job');
 		if (!is_object($job)) {
 			$job = new robonectcmd();
@@ -1015,7 +1022,7 @@ class robonect extends eqLogic {
 		$job->setDisplay('message_placeholder', __('Lister vos options', __FILE__));
 		$job->setEqLogic_id($this->getId());
 		$job->save();
-		
+
 		$refresh = $this->getCmd(null, 'refresh');
 		if (!is_object($refresh)) {
 			$refresh = new robonectcmd();
@@ -1028,12 +1035,12 @@ class robonect extends eqLogic {
 		$refresh->setEqLogic_id($this->getId());
 		$refresh->save();
 	}
-	
+
 	public function postAjax() {
 		self::deamon_stop();
 		self::deamon_start();
 	}
-	
+
 	public function toHtml($_version = 'dashboard') {
 		$replace = $this->preToHtml($_version);
 		if (!is_array($replace)) {
@@ -1161,9 +1168,9 @@ class robonectCmd extends cmd {
 								log::add('robonect','error','Vous ne pouvez pas passer duration et start et end en même temps comme paramètre');
 								return;
 							} else if(strpos($_options['message'], 'start') !== false){
-								$calculate ='end';	
+								$calculate ='end';
 							} else if(strpos($_options['message'], 'end') !== false){
-								$calculate ='start';	
+								$calculate ='start';
 							}
 						}
 						foreach ($params as $param) {
@@ -1199,7 +1206,8 @@ class robonectCmd extends cmd {
 			$result=$request_http->exec();
 			log::add('robonect','debug',$result);
 		}
-		$status = $eqLogic->getrobonectInfo();
+		log::add('robonect','debug','refresh');
+		$eqLogic->setCache('daemonTimerReset',1);
 	}
 
 	/************************Getteur Setteur****************************/

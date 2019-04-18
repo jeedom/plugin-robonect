@@ -269,7 +269,7 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
           <div class="col-sm-3">
 		  <label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="ignorebaseposition"/></label>
           </div>
-        </div>
+        </div></br>
 		<div class="form-group">
           <label class="col-sm-3 control-label">{{Coordonnées de la base (si option ne pas sauver activé)}}</label>
           <div class="col-sm-3">
