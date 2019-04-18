@@ -1,6 +1,8 @@
 <div class="eqLogic-widget eqLogic" style="height:205px !important;width: 250px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;" data-page="home" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" >
   <span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
-  <i class='fas fa-sync pull-right cursor cmd refresh' data-cmd_id="#cmd_refresh_id#" title="Rafraîchir" style="top: 3px;right: 3px;position:absolute;"></i>
+  <span class="cmd refresh pull-right cursor" data-cmd_id="#refresh_id#">
+		<i class="fas fa-sync"></i>
+	</span>
   <i class='fa fa-home base' title="Sur sa base" style="bottom: 3px;left: 3px;position:absolute;display:none"></i>
   <i class='fa fa-plug charging' title="En charge" style="bottom: 3px;left: 20px;position:absolute;display:none"></i>
   <i class='jeedom meteo-soleil timer' title="Timer en veille" style="bottom: 3px;left: 32px;position:absolute;display:none"></i>
@@ -281,18 +283,18 @@
 		$('.eqLogic[data-eqLogic_uid=#uid#] .timeinfo').hide();
 	}
 	if ('#timerstatus#' == '2') {
-		$('.eqLogic[data-eqLogic_uid=#uid#] .timer').css('dispay', 'show');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .timer').css('display', 'block');
 	}
 	if ('#statusnum#' == '1'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 250px;" />');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
 	} else if ('#statusnum#' == '2') {
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-tonte.gif" style="width : 250px;" />');
     } else if ('#statusnum#' == '3'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-retour.gif" style="width : 250px;" />');
 	} else if ('#statusnum#' == '4'){
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('dispay', 'show');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('dispay', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('display', 'block');
 	if ('#batterie#' <= 37) {
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-rouge.gif" style="width : 250px;" />');
     } else if ('#batterie#' <= 65) {
@@ -310,7 +312,7 @@
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 250px;" />');
 	} else if ('#statusnum#' == '17'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-veille.gif" style="width : 250px;" />');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('dispay', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
 	} else if ('#statusnum#' == '16'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-power-off"></i>');
 	} else {
@@ -332,7 +334,7 @@
 	if ('#stopped#' == '1' && '#statusnum#' == '1'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').empty().append('<img src="/plugins/robonect/core/config/315x.png" style="height : 100px;margin-top:-20px;margin-bottom:-20px" />');
       $('.eqLogic[data-eqLogic_uid=#uid#] .status').empty().append('A l\'arrêt');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base')css('dispay', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
 	}
    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
      jeedom.cmd.execute({id: $(this).data('cmd_id')});

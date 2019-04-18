@@ -1,6 +1,8 @@
-<div class="eqLogic-widget eqLogic" style="min-height : 190px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" >
+<div class="eqLogic-widget eqLogic" style="min-height : 205px;border:#border#;border-radius:#border-radius#;background-color: #background-color#;color: #color#;#style#;" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" >
   <span class="statusCmd pull-right" style="position : absolute;left : 2px;z-index: 1030;"></span>
-  <i class='fas fa-sync pull-right cursor cmd refresh' data-cmd_id="#cmd_refresh_id#" style="top: 3px;right: 3px;position:absolute;"></i>
+  <span class="cmd refresh pull-right cursor" data-cmd_id="#refresh_id#">
+		<i class="fas fa-sync"></i>
+	</span>
   <i class='fa fa-home base' title="Sur sa base" style="bottom: 3px;left: 3px;position:absolute;display:none"></i>
   <i class='fa fa-plug charging' title="En charge" style="bottom: 3px;left: 20px;position:absolute;display:none"></i>
   <i class='jeedom meteo-soleil timer' title="Timer en veille" style="bottom: 3px;left: 30px;position:absolute;display:none"></i>
@@ -8,8 +10,8 @@
   <center class="widget-name" style="#hideEqLogicName#">#name_display#  <span style="font-size: 0.85em;position: relative;top:-2px;">#object_name#</span></center>
 
 <div class="row page home">
-	<a class="gotomap cursor" title="Page Carte" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotodetail cursor" title="Page Détails" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"><i class="fa fa-chevron-left"></i></a>
+	<i class="gotomap fa fa-chevron-right" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"></i>
+	<i class="gotodetail fa fa-chevron-left" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"></i>
     <div class="col-xs-12">
 	<center>
         <span class="status" style="font-size : 13px;font-weight: bold;Cursor:default">#status# <span class="timeinfo">depuis #depuis#min</span></span><br/>
@@ -19,10 +21,10 @@
     </div>
 	<div class="col-xs-12">
 	<center>
-		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd modeAuto" data-cmd_id="#cmd_modeAuto_id#" title="Mode Auto"><i class="fa fa-recycle"></i></a>
-        <a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd modeEod" data-cmd_id="#cmd_modeEod_id#" title="Fin de journée"><i class="jeedom nature-night2"></i></a>
-        <a class="ui-btn ui-mini ui-btn-inline ui-btn-b modeHome" title="Retour base"><i class="fa fa-home"></i></a>
-        <a class="ui-btn ui-mini ui-btn-inline ui-btn-b modeJob" title="Lancer un Job"><i class="jeedom nature-grass"></i></a>
+		<a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd modeAuto" data-cmd_id="#cmd_modeAuto_id#" title="Mode Auto" style="font-size:0.6em;"><i class="fa fa-recycle"></i></a>
+        <a class="ui-btn ui-mini ui-btn-inline ui-btn-b cmd modeEod" data-cmd_id="#cmd_modeEod_id#" title="Fin de journée" style="font-size:0.6em;"><i class="jeedom nature-night2"></i></a>
+        <a class="ui-btn ui-mini ui-btn-inline ui-btn-b modeHome" title="Retour base"><i class="fa fa-home" style="font-size:0.6em;"></i></a>
+        <a class="ui-btn ui-mini ui-btn-inline ui-btn-b modeJob" title="Lancer un Job"><i class="jeedom nature-grass" style="font-size:0.6em;"></i></a>
       </center>
     </div>
 	<div class="col-xs-12">
@@ -32,11 +34,11 @@
     </div>
   </div>
   <div class="row page map" style="display:none;">
-	<a class="gotohealth cursor" title="Page Santé" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotohome cursor" title="Page Home" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
+	<i class="gotohealth fa fa-chevron-right" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"></i>
+	<i class="gotohome fa fa-chevron-left" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"></i>
     <div class="col-xs-12">
 	<center>
-        <iframe class="noRefresh" src="https://maps.google.com/maps/embed/v1/place?key=#apigoogle#&q=#gpspos#&zoom=19&maptype=satellite" width="180" height="150" frameborder="0" style="border:0"></iframe>
+        <iframe class="noRefresh" src="https://maps.google.com/maps/embed/v1/place?key=#apigoogle#&q=#gpspos#&zoom=19&maptype=satellite" width="150" height="150" frameborder="0" style="border:0"></iframe>
 	</center>
 	</div>
 	<div class="col-xs-12">
@@ -46,8 +48,8 @@
     </div>
   </div>
   <div class="row page health" style="display:none;">
-	<a class="gotostats cursor" title="Page Details" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotomap cursor" title="Page Carte" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
+	<i class="gotostats fa fa-chevron-right" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"></i>
+	<i class="gotomap fa fa-chevron-left" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"></i>
 	<div class="col-xs-6">
 	<center>
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Batterie</span></u>
@@ -127,8 +129,8 @@
     </div>
   </div>
   <div class="row page stats" style="display:none;">
-	<a class="gotodetail cursor" title="Page Home" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotohealth cursor" title="Page Santé" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
+	<i class="gotodetail fa fa-chevron-right" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"></i>
+	<i class="gotohealth fa fa-chevron-left" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"></i>
     <div class="col-xs-6">
 	<center>
         <u><span style="font-size : 1em; font-weight: bold;cursor:default">Dernière</span></u>
@@ -202,8 +204,8 @@
     </div>
   </div>
    <div class="row page detail" style="display:none;">
-	<a class="gotohome cursor" title="Page Home" style="position:absolute;top:75px;right:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-right"></i></a>
-	<a class="gotostats cursor" title="Page Santé" style="position:absolute;top:75px;left:3px;cursor:pointer;z-index: 500;font-size:1.5em;"><i class="fa fa-chevron-left"></i></a>
+	<i class="gotohome fa fa-chevron-right" style="position:absolute;top:75px;right:3px;z-index: 500;font-size:1.5em;"></i>
+	<i class="gotostats fa fa-chevron-left" style="position:absolute;top:75px;left:3px;z-index: 500;font-size: 1.5em;"></i>
 	<div class="col-xs-12">
 	<center>
         <span style="font-size : 13px;font-weight: bold;Cursor:default"><i class="jeedom divers-today1"></i> #robottime# le #robotdate#</span><br/>
@@ -274,18 +276,18 @@ $('.eqLogic[data-eqLogic_uid=#uid#] .modeJob').on('click', function() {
 		$('.eqLogic[data-eqLogic_uid=#uid#] .timeinfo').hide();
 	}
 	if ('#timerstatus#' == '2') {
-		$('.eqLogic[data-eqLogic_uid=#uid#] .timer').css('display', 'show');
+		$('.eqLogic[data-eqLogic_uid=#uid#] .timer').css('display', 'block');
 	}
 	if ('#statusnum#' == '1'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 100%;" />');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
 	} else if ('#statusnum#' == '2') {
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-tonte.gif" style="width : 100%;" />');
     } else if ('#statusnum#' == '3'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-retour.gif" style="width : 100%;" />');
 	} else if ('#statusnum#' == '4'){
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('display', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .charging').css('display', 'block');
 	if ('#batterie#' <= 37) {
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-charge-rouge.gif" style="width : 100%;" />');
     } else if ('#batterie#' <= 65) {
@@ -303,7 +305,7 @@ $('.eqLogic[data-eqLogic_uid=#uid#] .modeJob').on('click', function() {
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-erreur.gif" style="width : 100%;" />');
 	} else if ('#statusnum#' == '17'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<img src="/plugins/robonect/core/template/images/mode-base.gif" style="width : 100%;" />');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
 	} else if ('#statusnum#' == '16'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').append('<i class="fa fa-power-off"></i>');
 	} else {
@@ -325,7 +327,7 @@ $('.eqLogic[data-eqLogic_uid=#uid#] .modeJob').on('click', function() {
 	if ('#stopped#' == '1' && '#statusnum#' == '1'){
       $('.eqLogic[data-eqLogic_uid=#uid#] .etat').empty().append('<img src="/plugins/robonect/core/config/315x.png" style="height : 100px;margin-top:-20px;margin-bottom:-20px" />');
       $('.eqLogic[data-eqLogic_uid=#uid#] .status').empty().append('A l\'arrêt');
-	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'show');
+	  $('.eqLogic[data-eqLogic_uid=#uid#] .base').css('display', 'block');
 	}
    $('.eqLogic[data-eqLogic_uid=#uid#] .cmd').on('click', function() {
      jeedom.cmd.execute({id: $(this).data('cmd_id')});
