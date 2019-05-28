@@ -1,31 +1,31 @@
 {
     "plugins\/husqvarna\/desktop\/php\/husqvarna.php": {
-        "Detecter": "entdecken",
-        "Gestion": "Verwaltung",
-        "Configuration": "Konfiguration",
-        "Mes equipements": "Mein Gerät",
-        "Général": "Allgemein",
-        "Identifiant de l'équipement": "Geräte ID",
-        "Nom de l'équipement": "Gerätename",
-        "Nom de la husqvarna": "Husqvarna Name",
-        "Objet parent": "Elternobjekt",
-        "Aucun": "Keine",
-        "Catégorie": "Kategorie",
-        "Activer": "Aktivieren",
-        "Visible": "Sichtbar",
+        "Detecter": "Detecter",
+        "Gestion": "Gestion",
+        "Configuration": "Configuration",
+        "Mes equipements": "Mes equipements",
+        "Général": "Général",
+        "Identifiant de l'équipement": "Identifiant de l'équipement",
+        "Nom de l'équipement": "Nom de l'équipement",
+        "Nom de la husqvarna": "Nom de la husqvarna",
+        "Objet parent": "Objet parent",
+        "Aucun": "Aucun",
+        "Catégorie": "Catégorie",
+        "Activer": "Activer",
+        "Visible": "Visible",
         "Indicateurs": "Indicateurs",
-        "Nom": "Name",
-        "Sous-Type": "Unter-Typ",
-        "Paramètres": "Parameter",
-        "Supprimer": "Löschen",
-        "Sauvegarder": "Speichern"
+        "Nom": "Nom",
+        "Sous-Type": "Sous-Type",
+        "Paramètres": "Paramètres",
+        "Supprimer": "Supprimer",
+        "Sauvegarder": "Sauvegarder"
     },
     "plugins\/husqvarna\/plugin_info\/configuration.php": {
         "Compte husqvarna": "Compte husqvarna",
-        "Password husqvarna": "Husqvarna Password"
+        "Password husqvarna": "Password husqvarna"
     },
     "plugins\/husqvarna\/core\/class\/husqvarna.class.php": {
-        "Démarrer": "gestartet",
+        "Démarrer": "Démarrer",
         "Arrêter": "Arrêter",
         "Ranger": "Ranger"
     }
