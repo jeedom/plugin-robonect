@@ -1,32 +1,32 @@
 {
     "plugins\/husqvarna\/desktop\/php\/husqvarna.php": {
-        "Detecter": "entdecken",
+        "Detecter": "Detecter",
         "Gestion": "Verwaltung",
         "Configuration": "Konfiguration",
-        "Mes equipements": "Mein Gerät",
+        "Mes equipements": "Meine Geräte",
         "Général": "Allgemein",
-        "Identifiant de l'équipement": "Geräte ID",
+        "Identifiant de l'équipement": "Identifiant de l'équipement",
         "Nom de l'équipement": "Gerätename",
-        "Nom de la husqvarna": "Husqvarna Name",
-        "Objet parent": "Elternobjekt",
-        "Aucun": "Keine",
+        "Nom de la husqvarna": "Nom de la husqvarna",
+        "Objet parent": "Eltern-Objekt",
+        "Aucun": "Ohne",
         "Catégorie": "Kategorie",
-        "Activer": "Aktivieren",
+        "Activer": "aktivieren",
         "Visible": "Sichtbar",
-        "Indicateurs": "Indicateurs",
+        "Indicateurs": "Indikatoren",
         "Nom": "Name",
-        "Sous-Type": "Unter-Typ",
+        "Sous-Type": "Untertyp",
         "Paramètres": "Parameter",
         "Supprimer": "Löschen",
         "Sauvegarder": "Speichern"
     },
     "plugins\/husqvarna\/plugin_info\/configuration.php": {
         "Compte husqvarna": "Compte husqvarna",
-        "Password husqvarna": "Husqvarna Password"
+        "Password husqvarna": "Password husqvarna"
     },
     "plugins\/husqvarna\/core\/class\/husqvarna.class.php": {
-        "Démarrer": "gestartet",
-        "Arrêter": "Arrêter",
+        "Démarrer": "Start",
+        "Arrêter": "Beenden",
         "Ranger": "Ranger"
     }
 }
