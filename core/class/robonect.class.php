@@ -1082,7 +1082,6 @@ class robonect extends eqLogic {
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', 'robonect')));
 	}
 }
-}
 
 class robonectCmd extends cmd {
 	/***************************Attributs*******************************/
