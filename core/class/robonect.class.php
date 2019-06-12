@@ -21,6 +21,7 @@ require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class robonect extends eqLogic {
 	/***************************Attributs*******************************/
+	public static $_widgetPossibility = array('custom' => true);
 
 	public static function deamon_info() {
 		$return = array();
@@ -1062,6 +1063,12 @@ class robonect extends eqLogic {
 		}
 		$cron = cron::byClassAndFunction('robonect', 'cronModeHandler');
 		$replace['#apigoogle#'] = $this->getConfiguration('apiGoogle','');
+		if (str_replace('px' ,'' ,$replace['#height#']) < 205) {
+			$replace['#height#'] = '205px';
+		}
+		if (str_replace('px' ,'' ,$replace['#width#']) < 250) {
+			$replace['#width#'] = '250px';
+		}
 		if (is_object($cron)) {
 			$next=$cron->getSchedule();
 			$replace['#next#'] = substr($next,3,2).':'.substr($next,0,2).' le '. substr($next,6,2).' '. $this->getMonthHuman()[substr($next,9,2)];
@@ -1074,6 +1081,7 @@ class robonect extends eqLogic {
 		}
 		return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'eqLogic', 'robonect')));
 	}
+}
 }
 
 class robonectCmd extends cmd {
