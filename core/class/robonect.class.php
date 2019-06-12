@@ -429,7 +429,7 @@ class robonect extends eqLogic {
 	}
 
 	public function preSave() {
-		$this->setConfiguration('url',network::getNetworkAccess('internal') . '/plugins/robonect/core/php/Api.php?apikey=' . jeedom::getApiKey('robonect') . '&jid=' . $this->getId());
+		$this->setConfiguration('url',network::getNetworkAccess('internal') . '/plugins/robonect/core/php/Api.php?jid=' . $this->getId());
 		$this->setConfiguration('battery_type', 'Batterie');
 	}
 
