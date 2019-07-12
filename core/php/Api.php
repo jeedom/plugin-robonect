@@ -20,6 +20,8 @@ require_once dirname(__FILE__) . "/../../../../core/php/core.inc.php";
 	//die();
 //}
 $id = init('jid');
+http_response_code(200);
+header("Content-Type: application/json");
 $eqLogic = robonect::byId($id);
 $content = file_get_contents('php://input');
 log::add('robonect','debug',$content);
@@ -30,6 +32,12 @@ $mode= init('mode');
 $battery= init('battery');
 $duration= init('duration');
 $hours= init('hours');
+$distance= init('distance');
+$statecmd = $eqLogic->getCmd(null, 'statusnum');
+$stateLabelcmd = $eqLogic->getCmd(null, 'status');
+$previousStateNum = $statecmd->execCmd();
+$previousStateLabel = $stateLabelcmd->execCmd();
+log::add('robonect','debug','Previous State is ' . $previousStateLabel);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'statusnum'), $status);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'status'), $eqLogic->getStatusHuman()[$status]);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'wlansignal'), $signal);
@@ -39,9 +47,13 @@ $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'mode'), $eqLogic->getModeHum
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'batterie'), $battery);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'statesince'), $duration);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'totalhours'), $hours);
+$eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'distance'), $distance);
 if ($battery != $eqLogic->getStatus('battery')) {
 	$eqLogic->batteryStatus($battery);
 	$eqLogic->save();
+}
+if ($status == 1 && $previousStateNum == 17){
+	die();
 }
 $eqLogic->setCache('daemonTimerReset',1);
 $eqLogic->refreshWidget();

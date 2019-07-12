@@ -271,6 +271,9 @@ class robonect extends eqLogic {
 					case 'statesince':
 						$value = $jsonrobonectStatus['status']['duration'];
 						break;
+					case 'distance':
+						$value = $jsonrobonectStatus['status']['distance'];
+						break;
 					case 'stopped':
 						$value = $jsonrobonectStatus['status']['stopped'];
 						break;
@@ -342,13 +345,13 @@ class robonect extends eqLogic {
 						$value = $jsonrobonectMotor['blade']['speed'];
 						break;
 					case 'batteryvoltage':
-						$value = $jsonrobonectBattery['battery']['voltage']/1000;
+						$value = $jsonrobonectBattery['batteries'][0]['voltage']/1000;
 						break;
 					case 'batterytemperature':
-						$value = $jsonrobonectBattery['battery']['temperature']/10;
+						$value = $jsonrobonectBattery['batteries'][0]['temperature']/10;
 						break;
 					case 'batterycapacity':
-						$value = $jsonrobonectBattery['battery']['capacity']['remaining'];
+						$value = $jsonrobonectBattery['batteries'][0]['capacity']['remaining'];
 						break;
 					case 'totalrun':
 						$value = $jsonrobonectHour['general']['run'];
@@ -771,6 +774,19 @@ class robonect extends eqLogic {
 		$batterycapacity->setSubType('numeric');
 		$batterycapacity->setEqLogic_id($this->getId());
 		$batterycapacity->save();
+
+		$distance = $this->getCmd(null, 'distance');
+		if (!is_object($distance)) {
+			$distance = new robonectcmd();
+			$distance->setLogicalId('distance');
+			$distance->setIsVisible(1);
+			$distance->setUnite('m');
+			$distance->setName(__('Départ à distance', __FILE__));
+		}
+		$distance->setType('info');
+		$distance->setSubType('numeric');
+		$distance->setEqLogic_id($this->getId());
+		$distance->save();
 
 		$totalrun = $this->getCmd(null, 'totalrun');
 		if (!is_object($totalrun)) {
@@ -1210,7 +1226,7 @@ class robonectCmd extends cmd {
 			}
 			log::add('robonect','debug','Executing : ' . $url);
 			$request_http = new com_http($url);
-			$result=$request_http->exec();
+			$result=$request_http->exec(5,2);
 			log::add('robonect','debug',$result);
 		}
 		log::add('robonect','debug','refresh');
