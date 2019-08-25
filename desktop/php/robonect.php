@@ -43,7 +43,7 @@ $eqLogics = eqLogic::byType('robonect');
                     echo '</div>';
                 }
                 ?>
-            </div>  
+            </div>
 </div>
 <div class="col-lg-12 eqLogic" style="border-left: solid 1px #EEE; padding-left: 25px;display: none;">
   <a class="btn btn-success eqLogicAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
@@ -72,7 +72,7 @@ $eqLogics = eqLogic::byType('robonect');
                         <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
                         <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement}}"/>
                     </div>
-					
+
                 </div>
                 <div class="form-group">
                 <label class="col-lg-3 control-label" >{{Objet parent}}</label>
@@ -137,10 +137,10 @@ foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
 <div class="col-sm-6">
 <div class="form-group">
   <center>
-    <img id="icon_visu" src="plugins/robonect/plugin_info/robonect_icon.png" style="height : 300px;margin-top:5px" />
+    <img id="icon_visu" src="plugins/robonect/plugin_info/robonect_icon.png" style="height : 300px;margin-top:5px" onerror="this.src='plugins/robonect/plugin_info/robonect_icon.png'" />
   </center>
   </div>
-  
+
        <form class="form-horizontal">
   <fieldset>
 		<div class="form-group">
