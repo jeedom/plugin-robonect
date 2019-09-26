@@ -1,13 +1,13 @@
 {
     "plugins\/husqvarna\/desktop\/php\/husqvarna.php": {
-        "Detecter": "Detecter",
+        "Detecter": "Detecting",
         "Gestion": "Management",
         "Configuration": "Configuration",
         "Mes equipements": "My equipments",
         "Général": "Main",
-        "Identifiant de l'équipement": "Identifiant de l'équipement",
+        "Identifiant de l'équipement": "Equipment ID",
         "Nom de l'équipement": "Device name",
-        "Nom de la husqvarna": "Nom de la husqvarna",
+        "Nom de la husqvarna": "Husqvarna's name",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
@@ -21,12 +21,12 @@
         "Sauvegarder": "Save"
     },
     "plugins\/husqvarna\/plugin_info\/configuration.php": {
-        "Compte husqvarna": "Compte husqvarna",
-        "Password husqvarna": "Password husqvarna"
+        "Compte husqvarna": "Husqvarna account",
+        "Password husqvarna": "Husqvarna password"
     },
     "plugins\/husqvarna\/core\/class\/husqvarna.class.php": {
         "Démarrer": "Start",
         "Arrêter": "Stop",
-        "Ranger": "Ranger"
+        "Ranger": "Put back in place"
     }
 }
