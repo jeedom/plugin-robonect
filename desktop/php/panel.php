@@ -2,6 +2,7 @@
 if (!isConnect()) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
+sendVarToJS('mobile', init('mobile'));
 $eqLogics = robonect::byType('robonect');
 $eqLogic = $eqLogics[0];
 $lastpositionCMD = $eqLogic->getCmd(null, 'gpspos');
@@ -41,7 +42,7 @@ sendVarToJS('APIGOOGLE', $apiGoogle);
     </style>
   </head>
   <body>
-   <div id="div_object">
+   <div id="div_object" class="page">
         <legend style="height: 25px;">
             <span class="objectName"></span>
 			<span style="font-size:0.6em"><?php echo $text ?></span>
@@ -55,6 +56,12 @@ sendVarToJS('APIGOOGLE', $apiGoogle);
     </div>
     <div id="map"></div>
     <script>
+		$( document ).ready(function() {
+	if (mobile == '1'){
+		$('header').remove();
+		$('.page').css('margin-top',"-50px");
+	}
+});
       function initMap() {
         <?php
 		echo "var HOME = {lat: " .$homePosition[0] . ", lng: " .$homePosition[1] . "};
