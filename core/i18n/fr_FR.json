@@ -1,19 +1,32 @@
 {
-    "plugin_info\/configuration.php": {
-        "401 - Accès non autorisé": "401 - Accès non autorisé"
-    },
-    "desktop\/modal\/home.php": {
+    "plugins\/robonect\/mobile\/modal\/homeMobile.html": {
         "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ": "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ",
         "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
         "minute(s)": "minute(s)",
         "heure(s)": "heure(s)",
         "jour(s)": "jour(s)",
         "semaine(s)": "semaine(s)",
-        "mois (basé sur 30 jours)": "mois (basé sur 30 jours)",
-        "Annuler": "Annuler",
-        "Continuer": "Continuer"
+        "mois (basé sur 30 jours)": "mois (basé sur 30 jours)"
     },
-    "desktop\/modal\/job.php": {
+    "plugins\/robonect\/mobile\/modal\/jobMobile.html": {
+        "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ": "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ",
+        "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
+        "minute(s)": "minute(s)",
+        "heure(s)": "heure(s)",
+        "Normal": "Normal",
+        "Depuis la base": "Depuis la base",
+        "Distance 1": "Distance 1",
+        "Distance 2": "Distance 2",
+        "Distance 3": "Distance 3",
+        "Maison": "Maison",
+        "Fin de journée": "Fin de journée",
+        "Manuel": "Manuel",
+        "Auto": "Auto"
+    },
+    "plugins\/robonect\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Accès non autorisé"
+    },
+    "plugins\/robonect\/desktop\/modal\/job.php": {
         "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ": "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ",
         "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
         "minute(s)": "minute(s)",
@@ -30,12 +43,18 @@
         "Annuler": "Annuler",
         "Continuer": "Continuer"
     },
-    "desktop\/js\/robonect.js": {
-        "Santé robonect": "Santé robonect",
-        "Historiser": "Historiser",
-        "Tester": "Tester"
+    "plugins\/robonect\/desktop\/modal\/home.php": {
+        "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ": "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ",
+        "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
+        "minute(s)": "minute(s)",
+        "heure(s)": "heure(s)",
+        "jour(s)": "jour(s)",
+        "semaine(s)": "semaine(s)",
+        "mois (basé sur 30 jours)": "mois (basé sur 30 jours)",
+        "Annuler": "Annuler",
+        "Continuer": "Continuer"
     },
-    "desktop\/php\/panel.php": {
+    "plugins\/robonect\/desktop\/php\/panel.php": {
         "Il vous faut une clé Api Google Maps Widget pour avoir le panel de position": "Il vous faut une clé Api Google Maps Widget pour avoir le panel de position",
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Du": "Du",
@@ -43,7 +62,7 @@
         "Ok": "Ok",
         "Reset": "Reset"
     },
-    "desktop\/php\/robonect.php": {
+    "plugins\/robonect\/desktop\/php\/robonect.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Configuration": "Configuration",
@@ -91,18 +110,23 @@
         "Ne pas sauver toutes les positions si en base": "Ne pas sauver toutes les positions si en base",
         "Coordonnées de la base (si option ne pas sauver activé)": "Coordonnées de la base (si option ne pas sauver activé)"
     },
-    "core\/ajax\/robonect.ajax.php": {
+    "plugins\/robonect\/desktop\/js\/robonect.js": {
+        "Santé robonect": "Santé robonect",
+        "Historiser": "Historiser",
+        "Tester": "Tester"
+    },
+    "plugins\/robonect\/core\/php\/robonectApi.php": {
+        "Clef API non valide, vous n\\'êtes pas autorisé à effectuer cette action (robonect)": "Clef API non valide, vous n\\'êtes pas autorisé à effectuer cette action (robonect)"
+    },
+    "plugins\/robonect\/core\/php\/Api.php": {
+        "Clef API non valide, vous n\\'êtes pas autorisé à effectuer cette action (robonect)": "Clef API non valide, vous n\\'êtes pas autorisé à effectuer cette action (robonect)"
+    },
+    "plugins\/robonect\/core\/ajax\/robonect.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Robonect eqLogic non trouvé : ": "Robonect eqLogic non trouvé : ",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/php\/Api.php": {
-        "Clef API non valide": "Clef API non valide"
-    },
-    "core\/php\/robonectApi.php": {
-        "Clef API non valide": "Clef API non valide"
-    },
-    "core\/class\/robonect.class.php": {
+    "plugins\/robonect\/core\/class\/robonect.class.php": {
         "Veuillez vérifier la configuration": "Veuillez vérifier la configuration",
         "Tache cron introuvable": "Tache cron introuvable",
         "Batterie": "Batterie",
@@ -155,29 +179,5 @@
         "Lancer un job": "Lancer un job",
         "Lister vos options": "Lister vos options",
         "Rafraîchir": "Rafraîchir"
-    },
-    "mobile\/modal\/homeMobile.html": {
-        "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ": "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ",
-        "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
-        "minute(s)": "minute(s)",
-        "heure(s)": "heure(s)",
-        "jour(s)": "jour(s)",
-        "semaine(s)": "semaine(s)",
-        "mois (basé sur 30 jours)": "mois (basé sur 30 jours)"
-    },
-    "mobile\/modal\/jobMobile.html": {
-        "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ": "Aucun equipement ne  correspond : Il faut (re)-enregistrer l\\'équipement ",
-        "L\\'id de l\\'équipement ne peut etre vide : ": "L\\'id de l\\'équipement ne peut etre vide : ",
-        "minute(s)": "minute(s)",
-        "heure(s)": "heure(s)",
-        "Normal": "Normal",
-        "Depuis la base": "Depuis la base",
-        "Distance 1": "Distance 1",
-        "Distance 2": "Distance 2",
-        "Distance 3": "Distance 3",
-        "Maison": "Maison",
-        "Fin de journée": "Fin de journée",
-        "Manuel": "Manuel",
-        "Auto": "Auto"
     }
 }
