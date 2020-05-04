@@ -1,16 +1,30 @@
 {
-	"id" : "robonect",
-	"name" : "Robonect",
-	"licence" : "AGPL",
-	"author" : "Ludovic SARAKHA",
-	"require" : "3.0",
-	"category" : "wellness",
-	"hasDependency" : false,
-	"hasOwnDeamon" : true,
-	"display" : "panel",
-	"mobile" : "robonect",
-	"documentation" : "https://jeedom.github.io/plugin-robonect/#language#/",
-	"changelog" : "https://jeedom.github.io/plugin-robonect/#language#/changelog",
-	"language" : ["fr_FR","en_US","de_DE","sp_SP","ru_RU","id_ID","it_IT"],
-	"compatibility" : ["Jeedomboard","Smart","RPI/RPI2","Docker","DIY"]
+    "id": "robonect",
+    "name": "Robonect",
+    "licence": "AGPL",
+    "author": "Ludovic SARAKHA",
+    "require": "3.0",
+    "category": "wellness",
+    "hasDependency": false,
+    "hasOwnDeamon": true,
+    "display": "panel",
+    "mobile": "robonect",
+    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/wellness\/robonect\/",
+    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/wellness\/robonect\/changelog",
+    "language": [
+        "fr_FR",
+        "en_US",
+        "de_DE",
+        "sp_SP",
+        "ru_RU",
+        "id_ID",
+        "it_IT"
+    ],
+    "compatibility": [
+        "Jeedomboard",
+        "Smart",
+        "RPI\/RPI2",
+        "Docker",
+        "DIY"
+    ]
 }
