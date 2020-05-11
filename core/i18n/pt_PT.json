@@ -124,7 +124,7 @@
     "plugins\/robonect\/core\/ajax\/robonect.ajax.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
         "Robonect eqLogic non trouvé : ": "Robonect eqLogic não encontrado:",
-        "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
+        "Aucune methode correspondante à : ": "Aucune methode correspondante à :"
     },
     "plugins\/robonect\/core\/class\/robonect.class.php": {
         "Veuillez vérifier la configuration": "Por favor, verifique a configuração",
