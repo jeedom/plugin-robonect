@@ -1,4 +1,6 @@
 {
-    "changelog.md": null,
+    "changelog.md": {
+        "Changelog Robonect": "Registro de cambios Robonect"
+    },
     "index.md": null
 }
