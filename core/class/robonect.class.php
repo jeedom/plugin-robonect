@@ -72,11 +72,11 @@ class robonect extends eqLogic {
 				$state = $currentstate;
 			}
 			if (in_array($state, array(2,3,5,99))){
-				$counter = $robonect->getConfiguration('timemowing',15);
+				$counter = (int) $robonect->getConfiguration('timemowing',15);
 			} else if (in_array($state,array(4,7,8))){
-				$counter = $robonect->getConfiguration('timecharging',120);
+				$counter = (int) $robonect->getConfiguration('timecharging',120);
 			} else {
-				$counter = $robonect->getConfiguration('timedefault',600);
+				$counter = (int) $robonect->getConfiguration('timedefault',600);
 			}
 			$i = 0;
 			while ($i < $counter) {
