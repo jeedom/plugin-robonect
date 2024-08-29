@@ -1071,7 +1071,7 @@ class robonect extends eqLogic {
 				$replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
 			}
 			if ($cmd->getLogicalId() == 'statesince') {
-				$replace['#depuis#']= round($cmd->execCmd()/60,1);
+				$replace['#depuis#']= round((float) $cmd->execCmd()/60,1);
 			}
 		}
 		foreach ($this->getCmd('action') as $cmd) {
