@@ -43,7 +43,7 @@ $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'status'), $eqLogic->getStatu
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'wlansignal'), $signal);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'stopped'), $stopped);
 $eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'modenum'), $mode);
-if(in_array(intval($mode),[0,1,2,3])) {
+if(in_array($mode,[0,1,2,3])) {
 	$eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'mode'), $eqLogic->getModeHuman()[$mode]);
 } else {
 	$eqLogic->checkAndUpdateCmd($eqLogic->getCmd(null, 'mode'), "{{Inconnu}} (".$mode.')');
