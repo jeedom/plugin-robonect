@@ -108,74 +108,74 @@ class robonect extends eqLogic {
 	}
 
 	public function getModeHuman()
-    {
-        return array(  	0 => 'Auto',
-						1 => 'Manuel',
-						2 => 'Maison',
-						3 => 'Démo',
-        );
-    }
+	{
+	        return array(  	0 => 'Auto',
+				1 => 'Manuel',
+				2 => 'Maison',
+				3 => 'Démo',
+	        );
+	}
 
 	public function getStatusHuman()
-    {
-        return array(  	0 => 'Parking',
-						1 => 'Sur sa base',
-						2 => 'En tonte',
-						3 => 'Recherche sa base',
-						4 => 'En charge',
-						5 => 'En recherche',
-						7 => 'En erreur',
-						8 => 'Signal de boucle perdu',
-						16 => 'Eteint',
-						17 => 'Fait dodo',
-        );
-    }
+	{
+		return array(  	0 => 'Parking',
+				1 => 'Sur sa base',
+				2 => 'En tonte',
+				3 => 'Recherche sa base',
+				4 => 'En charge',
+				5 => 'En recherche',
+				7 => 'En erreur',
+				8 => 'Signal de boucle perdu',
+				16 => 'Eteint',
+				17 => 'Fait dodo',
+		);
+	}
 
 	public function getMonthHuman()
-    {
-        return array(  	'01' => 'Janvier',
-						'02' => 'Février',
-						'03' => 'Mars',
-						'04' => 'Avril',
-						'05' => 'Mai',
-						'06' => 'Juin',
-						'07' => 'Juillet',
-						'08' => 'Aôut',
-						'09' => 'Septembre',
-						'10' => 'Octobre',
-						'11' => 'Novembre',
-						'12' => 'Décembre',
-        );
-    }
+	{
+		return array(  	'01' => 'Janvier',
+				'02' => 'Février',
+				'03' => 'Mars',
+				'04' => 'Avril',
+				'05' => 'Mai',
+				'06' => 'Juin',
+				'07' => 'Juillet',
+				'08' => 'Aôut',
+				'09' => 'Septembre',
+				'10' => 'Octobre',
+				'11' => 'Novembre',
+				'12' => 'Décembre',
+		);
+	}
 
 	public function convertMonthHuman($_date)
-    {
-        $montharray = array(  	'January'	=>  'Janvier',
-								'February'	=>  'Février',
-								'March'   	=>  'Mars',
-								'April'   	=>  'Avril',
-								'May'     	=>  'Mai',
-								'June'    	=>  'Juin',
-								'July'    	=>  'Juillet',
-								'August'  	=>  'Aôut',
-								'September'	=>  'Septembre',
-								'October' 	=>  'Octobre',
-								'November'	=>  'Novembre',
-								'December'	=>  'Décembre',
-        );
+	{
+		$montharray = array(  	'January'	=>  'Janvier',
+					'February'	=>  'Février',
+					'March'   	=>  'Mars',
+					'April'   	=>  'Avril',
+					'May'     	=>  'Mai',
+					'June'    	=>  'Juin',
+					'July'    	=>  'Juillet',
+					'August'  	=>  'Aôut',
+					'September'	=>  'Septembre',
+					'October' 	=>  'Octobre',
+					'November'	=>  'Novembre',
+					'December'	=>  'Décembre',
+		);
 		foreach ($montharray as $key=>$value) {
 			$_date=str_replace($key,$value,$_date);
 		}
 		return $_date;
-    }
+	}
 
 	public function getTimerHuman()
-    {
-        return array(  	0 => 'Désactivé',
-						1 => 'Actif',
-						2 => 'Veille',
-        );
-    }
+	{
+		return array(  	0 => 'Désactivé',
+				1 => 'Actif',
+				2 => 'Veille',
+		);
+	}
 
 	public function getrobonectInfo() {
 		try {
@@ -1071,7 +1071,10 @@ class robonect extends eqLogic {
 				$replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
 			}
 			if ($cmd->getLogicalId() == 'statesince') {
-				$replace['#depuis#']= round((float) $cmd->execCmd()/60,1);
+				if(is_object($cmd)) {
+					$_tempValue=floatval($cmd->execCmd());
+					$replace['#depuis#']=round($value/60,1);
+				}
 			}
 		}
 		foreach ($this->getCmd('action') as $cmd) {
