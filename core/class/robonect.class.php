@@ -265,8 +265,7 @@ class robonect extends eqLogic {
 						$value = $jsonrobonectStatus['status']['mode'];
 						break;
 					case 'statusnum':
-						$value = $jsonrobonectStatus['status']['status'];
-						$return = $value;
+						$value = $return = $jsonrobonectStatus['status']['status'];
 						break;
 					case 'statesince':
 						$value = $jsonrobonectStatus['status']['duration'];
@@ -1076,8 +1075,7 @@ class robonect extends eqLogic {
 			}
 			if ($cmd->getLogicalId() == 'statesince') {
 				if(is_object($cmd)) {
-					$_tempValue=floatval($cmd->execCmd());
-					$replace['#depuis#']=round($_tempValue/60,1);
+					$replace['#depuis#']=round(intval($cmd->execCmd())/60,1);
 				}
 			}
 		}
